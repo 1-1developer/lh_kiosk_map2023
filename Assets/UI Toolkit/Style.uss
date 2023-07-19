@@ -1,0 +1,122 @@
+.MainBt {
+    height: 309px;
+    width: 744px;
+    position: absolute;
+    top: 406px;
+    left: 948px;
+    background-image: url('project://database/Assets/Resource/data/image/main/main2bt0.png?fileID=2800000&guid=8b1da455365a2d54aab470d6690fa273&type=3#main2bt0');
+    -unity-background-scale-mode: scale-to-fit;
+    background-color: rgba(88, 88, 88, 0);
+    border-left-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 0);
+    border-top-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(255, 255, 255, 0);
+}
+
+.MainBt:active {
+    scale: 1.1 1.1;
+}
+
+.StartBt {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(88, 88, 88, 0);
+    display: flex;
+    transition-duration: 0.3s;
+}
+
+.StartBt--pade {
+    opacity: 0;
+    transition-duration: 0.5s;
+}
+
+.GlowMap {
+    width: 100%;
+    height: 100%;
+    background-image: url('project://database/Assets/Resource/data/image/map/%ED%85%8C%EB%91%90%EB%A6%AC1.png?fileID=2800000&guid=c4ce542f17c052d4d8d5c276bd0b40f6&type=3#테두리1');
+    opacity: 1;
+    transition-duration: 0.3s;
+}
+
+.GlowMap--un {
+    opacity: 0;
+    transition-duration: 0.3s;
+}
+
+.MapBt {
+    position: absolute;
+    height: 152px;
+    width: 166px;
+    top: 257px;
+    left: 409px;
+    background-image: url('project://database/Assets/Resource/data/image/map/1.png?fileID=2800000&guid=0448db999c874b147b892085306cf205&type=3#1');
+    background-color: rgba(88, 88, 88, 0);
+    justify-content: center;
+    align-items: center;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    -unity-background-scale-mode: scale-to-fit;
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.8);
+}
+
+.MapBt--un {
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.5);
+}
+
+.StartBt:active {
+    scale: 1.1 1.1;
+    transition-duration: 0.1s;
+    background-color: rgba(255, 255, 255, 0.27);
+}
+
+.MapSpot {
+    position: absolute;
+    top: 626px;
+    left: 619px;
+    height: 100px;
+    width: 67px;
+    background-color: rgba(88, 88, 88, 0);
+    background-image: url('project://database/Assets/Resource/data/image/map/pointersheet01.png?fileID=1450606656&guid=03eb85f1037ef73409e19a648b5ad5a4&type=3#pointersheet01_0');
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    justify-content: flex-end;
+    align-items: center;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.MapSpot:focus {
+    scale: 1.5 1.5;
+    transition-duration: 0.2s;
+    transform-origin: bottom;
+    background-image: url('project://database/Assets/Resource/data/image/map/pointer/%EC%9C%84%EC%B9%98%EB%B2%84%ED%8A%BC00.gif?fileID=2800000&guid=60d24fd6d34d7d3419ba20763a382294&type=3#위치버튼00');
+}
+
+.MapBubble {
+    position: absolute;
+    height: 284px;
+    width: 417.86px;
+    -unity-background-scale-mode: scale-to-fit;
+    background-image: url('project://database/Assets/Resource/data/image/map/Group%20479%20(5).png?fileID=2800000&guid=623e0da9c4ec51c428869ea73ee0f9ab&type=3#Group 479 (5)');
+    top: 257px;
+    left: 30px;
+    scale: 0 0;
+    transition-duration: 0.2s;
+}
+
+.MapBubble--on {
+    scale: 1 1;
+    transform-origin: bottom;
+    transition-duration: 0.3s;
+}

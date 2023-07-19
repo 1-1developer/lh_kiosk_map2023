@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="HomeScreen" src="project://database/Assets/UI%20Toolkit/HomeScreen.uxml?fileID=9197481963319205126&amp;guid=369f3863ff4321c42b284b00ee3e021e&amp;type=3#HomeScreen" />
+    <ui:Template name="MainScreenNav" src="project://database/Assets/UI%20Toolkit/MainScreenNav.uxml?fileID=9197481963319205126&amp;guid=55239de663644dc4ba262b899d257bdc&amp;type=3#MainScreenNav" />
+    <ui:Template name="MainScreenTraffic" src="project://database/Assets/UI%20Toolkit/MainScreenTraffic.uxml?fileID=9197481963319205126&amp;guid=79777b8a48bc1174c8a8ed0653eb288c&amp;type=3#MainScreenTraffic" />
+    <Style src="project://database/Assets/UI%20Toolkit/Style.uss?fileID=7433441132597879392&amp;guid=6b31c8f1d61f19949a75a8f34ea11540&amp;type=3#Style" />
+    <ui:Instance template="HomeScreen" name="HomeScreen" style="position: absolute; width: 100%; height: 100%;" />
+    <ui:Instance template="MainScreenNav" name="MainScreenNav" style="width: 100%; height: 100%; display: none; position: absolute;" />
+    <ui:Instance template="MainScreenTraffic" name="MainScreenTraffic" style="width: 100%; height: 100%; position: absolute; display: none;" />
+</ui:UXML>
