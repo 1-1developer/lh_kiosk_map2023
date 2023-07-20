@@ -12,7 +12,8 @@ public class HomeScreen : MenuScreen
     const string MAINBT1 = "MainBt1";
     const string GLOW = "Glow";
     const string GLOWT = "Glow0";
-
+    [SerializeField]
+    InitTimer timer;
     Button m_StartBt;
     Button m_MainBt0;
     Button m_MainBt1;
@@ -36,6 +37,9 @@ public class HomeScreen : MenuScreen
         }
 
     }
+    private void Start()
+    {
+    }
     protected override void RegisterButtonCallbacks()
     {
         base.RegisterButtonCallbacks();
@@ -49,6 +53,8 @@ public class HomeScreen : MenuScreen
     {
         AudioManager.PlayDefaultButtonSound();
         ScreenStart();
+        LoopGlow();
+        timer.isStart = true;
     }
 
     void ScreenStart()
@@ -65,7 +71,6 @@ public class HomeScreen : MenuScreen
 
     private void OnMainBt(int v)
     {
-        LoopGlow();
         AudioManager.PlayDefaultButtonSound();
         if (v==0)
         {
@@ -105,5 +110,10 @@ public class HomeScreen : MenuScreen
             evt => m_TrafficBtGlows[a].ToggleInClassList("GlowMap--un")
             );
     }
-
+    public void initHome()
+    {
+        m_StartBt.RemoveFromClassList("StartBt--pade");
+        m_StartBt.style.display = DisplayStyle.Flex;
+        m_G_mainbt.style.display = DisplayStyle.None;
+    }
 }

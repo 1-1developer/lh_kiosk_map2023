@@ -19,37 +19,43 @@ public class MainScreenNav : MenuScreen
     const string MOTIONS = "MotionScreen";
     const string INFOG = "infoG";
     const string RETURN = "returnBt";
+    const string GPICKER = "PickerG";
+
+    const string MAPPICKER = "MapPicker";
+    const string PICKERBT = "PickerBt";
 
     public Sprite[] spotSprites;
 
     public Sprite[] POPinfos;
     public Sprite[] Topinfos;
 
-    //서울 여의도 삼성 순
-    public Sprite[] Routes0; //고양창릉
-    public Sprite[] Routes1; //고양창릉
-    public Sprite[] Routes2; //고양창릉
-    public Sprite[] Routes3; //부천대장,인천계양
-    public Sprite[] Routes4; //부천대장,인천계양
-    public Sprite[] Routes5; //부천대장,인천계양
-    public Sprite[] Routes6; //남양주왕숙2
-    public Sprite[] Routes7; //남양주왕숙2
-    public Sprite[] Routes8; //남양주왕숙2
-    public Sprite[] Routes9; //남양주왕숙
-    public Sprite[] Routes10; //남양주왕숙
-    public Sprite[] Routes11; //남양주왕숙
-    public Sprite[] Routes12; //하남교산
-    public Sprite[] Routes13; //하남교산
-    public Sprite[] Routes14; //하남교산
+    //???? ?????? ???? ??
+    public Sprite[] Routes0; //????????
+    public Sprite[] Routes1; //????????
+    public Sprite[] Routes2; //????????
+    public Sprite[] Routes3; //????????,????????
+    public Sprite[] Routes4; //????????,????????
+    public Sprite[] Routes5; //????????,????????
+    public Sprite[] Routes6; //??????????2
+    public Sprite[] Routes7; //??????????2
+    public Sprite[] Routes8; //??????????2
+    public Sprite[] Routes9; //??????????
+    public Sprite[] Routes10; //??????????
+    public Sprite[] Routes11; //??????????
+    public Sprite[] Routes12; //????????
+    public Sprite[] Routes13; //????????
+    public Sprite[] Routes14; //????????
 
     Button m_HomeBt;
     Button m_BgBt;
     Button m_infoBackBt;
 
-    VisualElement m_MostionScreen; //길찾기 모션 출력, 하위 info 상위계층
-    VisualElement m_infoG; // info 상위계층
+    VisualElement m_MostionScreen; //?????? ???? ????, ???? info ????????
+    VisualElement m_infoG; // info ????????
     VisualElement m_MapPopWindow;
     VisualElement m_Topinfo;
+
+    VisualElement m_GPicker;
 
     List<Sprite[]> allRoutes = new List<Sprite[]>();
     List<Button> m_MapBts = new List<Button>();
@@ -61,9 +67,9 @@ public class MainScreenNav : MenuScreen
 
     int index;
     public int r_index;
-    int m_MapID; //지역선택ID
-    int m_SpotID; //지하철역 선택ID
-    int m_IDID; //지하철역 선택ID
+    int m_MapID; //????????ID
+    int m_SpotID; //???????? ????ID
+    int m_IDID; //???????? ????ID
 
     bool MapSelected =false;
     public bool Motionstop =false;
@@ -80,6 +86,7 @@ public class MainScreenNav : MenuScreen
         m_infoG = m_Root.Q<VisualElement>(INFOG);
         m_MapPopWindow = m_Root.Q<VisualElement>(MAPPOP);
         m_Topinfo = m_Root.Q<VisualElement>(TOPINFO);
+        m_GPicker = m_Root.Q<VisualElement>(GPICKER);
 
 
         for (int i = 0; i < 6; i++)
@@ -91,8 +98,18 @@ public class MainScreenNav : MenuScreen
         {
             m_MapSpots.Add(m_Root.Q<Button>(SPOT + $"{i}"));
         }
+        for (int i = 0; i < 18; i++)
+        {
+            m_MapPickers.Add(m_Root.Q<VisualElement>(MAPPICKER + $"{i}"));
+        }
+        for (int i = 0; i < 36; i++)
+        {
+            m_MapPickerBt.Add(m_Root.Q<Button>(PICKERBT + $"{i}"));
+        }
+
         setAllRoutes();
     }
+
     protected override void RegisterButtonCallbacks()
     {
         base.RegisterButtonCallbacks();
@@ -116,16 +133,61 @@ public class MainScreenNav : MenuScreen
         m_MapSpots[1].schedule.Execute(ac => loopTexture(spotSprites, m_MapSpots[1])).Every(30);
         m_MapSpots[2].schedule.Execute(ac => loopTexture(spotSprites, m_MapSpots[2])).Every(30);
 
-        //m_jobHandle = m_MostionScreen.schedule.Execute(ac => PlayTextureOnce(allRoutes[m_IDID], m_MostionScreen)).Every(10);
+        m_MapPickerBt[0].RegisterCallback<ClickEvent>(evt => onMapPickerBt(0));
+        m_MapPickerBt[1].RegisterCallback<ClickEvent>(evt => onMapPickerBt(1));
+        m_MapPickerBt[2].RegisterCallback<ClickEvent>(evt => onMapPickerBt(2));
+        m_MapPickerBt[3].RegisterCallback<ClickEvent>(evt => onMapPickerBt(3));
+        m_MapPickerBt[4].RegisterCallback<ClickEvent>(evt => onMapPickerBt(4));
+        m_MapPickerBt[5].RegisterCallback<ClickEvent>(evt => onMapPickerBt(5));
+        m_MapPickerBt[6].RegisterCallback<ClickEvent>(evt => onMapPickerBt(6));
+        m_MapPickerBt[7].RegisterCallback<ClickEvent>(evt => onMapPickerBt(7));
+        m_MapPickerBt[8].RegisterCallback<ClickEvent>(evt => onMapPickerBt(8));
+        m_MapPickerBt[9].RegisterCallback<ClickEvent>(evt => onMapPickerBt(9));
+        m_MapPickerBt[10].RegisterCallback<ClickEvent>(evt => onMapPickerBt(10));
+        m_MapPickerBt[11].RegisterCallback<ClickEvent>(evt => onMapPickerBt(11));
+        m_MapPickerBt[12].RegisterCallback<ClickEvent>(evt => onMapPickerBt(12));
+        m_MapPickerBt[13].RegisterCallback<ClickEvent>(evt => onMapPickerBt(13));
+        m_MapPickerBt[14].RegisterCallback<ClickEvent>(evt => onMapPickerBt(14));
+        m_MapPickerBt[15].RegisterCallback<ClickEvent>(evt => onMapPickerBt(15));
+        m_MapPickerBt[16].RegisterCallback<ClickEvent>(evt => onMapPickerBt(16));
+        m_MapPickerBt[17].RegisterCallback<ClickEvent>(evt => onMapPickerBt(17));
+        m_MapPickerBt[18].RegisterCallback<ClickEvent>(evt => onMapPickerBt(18));
+        m_MapPickerBt[19].RegisterCallback<ClickEvent>(evt => onMapPickerBt(19));
+        m_MapPickerBt[20].RegisterCallback<ClickEvent>(evt => onMapPickerBt(20));
+        m_MapPickerBt[21].RegisterCallback<ClickEvent>(evt => onMapPickerBt(21));
+        m_MapPickerBt[22].RegisterCallback<ClickEvent>(evt => onMapPickerBt(22));
+        m_MapPickerBt[23].RegisterCallback<ClickEvent>(evt => onMapPickerBt(23));
+        m_MapPickerBt[24].RegisterCallback<ClickEvent>(evt => onMapPickerBt(24));
+        m_MapPickerBt[25].RegisterCallback<ClickEvent>(evt => onMapPickerBt(25));
+        m_MapPickerBt[26].RegisterCallback<ClickEvent>(evt => onMapPickerBt(26));
+        m_MapPickerBt[27].RegisterCallback<ClickEvent>(evt => onMapPickerBt(27));
+        m_MapPickerBt[28].RegisterCallback<ClickEvent>(evt => onMapPickerBt(28));
+        m_MapPickerBt[29].RegisterCallback<ClickEvent>(evt => onMapPickerBt(29));
+        m_MapPickerBt[30].RegisterCallback<ClickEvent>(evt => onMapPickerBt(30));
+        m_MapPickerBt[31].RegisterCallback<ClickEvent>(evt => onMapPickerBt(31));
+        m_MapPickerBt[32].RegisterCallback<ClickEvent>(evt => onMapPickerBt(32));
+        m_MapPickerBt[33].RegisterCallback<ClickEvent>(evt => onMapPickerBt(33));
+        m_MapPickerBt[34].RegisterCallback<ClickEvent>(evt => onMapPickerBt(34));
+        m_MapPickerBt[35].RegisterCallback<ClickEvent>(evt => onMapPickerBt(35));
 
+
+    }
+
+    private void onMapPickerBt(int v)
+    {
+        AudioManager.PlayDefaultButtonSound();
+        m_infoBackBt.style.display = DisplayStyle.Flex;
+        m_MapPopWindow.style.backgroundImage = POPinfos[v].texture;
     }
 
     private void OnBackBt(ClickEvent evt)
     {
+        AudioManager.PlayDefaultButtonSound();
         m_infoBackBt.style.display = DisplayStyle.None;
     }
     private void OnMapBt(int v)
     {
+        m_GPicker.style.display = DisplayStyle.None;
         m_infoG.style.display = DisplayStyle.None;
         m_MostionScreen.style.display = DisplayStyle.None;
         MapSelected = true;
@@ -135,7 +197,7 @@ public class MainScreenNav : MenuScreen
     }
     private void OnMapSpot(int v)
     {
-        if (MapSelected)//지도먼저선택
+        if (MapSelected)//????????????
         {
             m_SpotID = v;
             checkID(m_MapID, m_SpotID);
@@ -145,30 +207,20 @@ public class MainScreenNav : MenuScreen
         }
         AudioManager.PlayDefaultButtonSound();
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StopCoroutine(runningCoroutine);
-            Debug.Log("stop");
-        }
-    }
-    void checkID(int m,int p)//루트 판별
+
+    void checkID(int m,int p)//???? ????
     {
         int ID = m*3+p;
         setinfo(ID);
         m_IDID = ID;
         r_index = 0;
+        showPickers(ID);
         if (runningCoroutine != null)
         {
             StopCoroutine(runningCoroutine);
         }
         runningCoroutine = StartCoroutine(PlayTextureRoutine());
-        Debug.Log("start");
-
-        //m_jobHandle = m_MostionScreen.schedule.Execute(ac => PlayTextureOnce(allRoutes[ID], m_MostionScreen)).Every(10);
-        //m_MostionScreen.schedule.Execute(ac => PlayTextureOnce(allRoutes[ID], m_MostionScreen)).Every(10);
-
+        m_GPicker.style.display = DisplayStyle.Flex;
     }
     void setinfo(int i)
     {
@@ -179,9 +231,9 @@ public class MainScreenNav : MenuScreen
 
         while (r_index < allRoutes[m_IDID].Length)
         {
-            // 텍스처 처리 로직
+            // ?????? ???? ????
             PlayTextureOnce(allRoutes[m_IDID], m_MostionScreen);
-            yield return new WaitForSeconds(0.05f); // 0.1초마다 실행
+            yield return new WaitForSeconds(0.05f); // 0.1?????? ????
         }
 
     }
@@ -218,6 +270,7 @@ public class MainScreenNav : MenuScreen
     }
     private void OnBgBt(ClickEvent evt)
     {
+        AudioManager.PlayDefaultButtonSound();
         initMap();
     }
     private void initMap()
@@ -233,6 +286,9 @@ public class MainScreenNav : MenuScreen
     {
         AudioManager.PlayDefaultButtonSound();
         m_MainMenuUIManager.ShowHomeScreen();
+        m_GPicker.style.display = DisplayStyle.None;
+        m_infoG.style.display = DisplayStyle.None;
+        m_MostionScreen.style.display = DisplayStyle.None;
     }
     void showBubble(int i)
     {
@@ -271,5 +327,26 @@ public class MainScreenNav : MenuScreen
         allRoutes.Add(Routes12);
         allRoutes.Add(Routes13);
         allRoutes.Add(Routes14);
+    }
+    void showPickers(int index)
+    {
+        VisualElement v = m_MapPickers[index];
+        foreach (VisualElement a in m_MapPickers)
+        {
+            if (a == v)
+            {
+                a.style.display = DisplayStyle.Flex;
+            }
+            else
+            {
+                a.style.display = DisplayStyle.None;
+            }
+        }
+    }
+    public void initNav()
+    {
+        m_GPicker.style.display = DisplayStyle.None;
+        m_infoG.style.display = DisplayStyle.None;
+        m_MostionScreen.style.display = DisplayStyle.None;
     }
 }
