@@ -12,6 +12,7 @@ public class MainScreenNav : MenuScreen
     const string HOMEBT = "HomeBt";
     const string BUBBLE = "MapBubble";
     const string SPOT = "MapSpot";
+    const string DOT = "MapDot";
     const string BG = "BGbt";
     const string INFOBACK = "infoBackBt";
     const string MAPPOP = "MapPopWindow";
@@ -25,6 +26,7 @@ public class MainScreenNav : MenuScreen
     const string PICKERBT = "PickerBt";
 
     public Sprite[] spotSprites;
+    public Sprite[] DotSprites;
 
     public Sprite[] POPinfos;
     public Sprite[] Topinfos;
@@ -60,12 +62,16 @@ public class MainScreenNav : MenuScreen
     List<Sprite[]> allRoutes = new List<Sprite[]>();
     List<Button> m_MapBts = new List<Button>();
     List<Button> m_MapSpots = new List<Button>();
+
+    List<VisualElement> m_MapDots = new List<VisualElement>();
     List<VisualElement> m_MapBubble = new List<VisualElement>();
 
     List<VisualElement> m_MapPickers = new List<VisualElement>();
     List<Button> m_MapPickerBt = new List<Button>();
 
     int index;
+    int[] indexsss= new int[3];
+    int[] indexs = new int[18];
     public int r_index;
     int m_MapID; //????????ID
     int m_SpotID; //???????? ????ID
@@ -75,6 +81,9 @@ public class MainScreenNav : MenuScreen
     public bool Motionstop =false;
 
     Coroutine runningCoroutine = null;
+
+    int dotms = 20;
+    int spotms = 70;
     protected override void SetVisualElements()
     {
         base.SetVisualElements();
@@ -97,6 +106,10 @@ public class MainScreenNav : MenuScreen
         for (int i = 0; i < 3; i++)
         {
             m_MapSpots.Add(m_Root.Q<Button>(SPOT + $"{i}"));
+        }
+        for (int i = 0; i < 18; i++)
+        {
+            m_MapDots.Add(m_Root.Q<VisualElement>(DOT + $"{i}"));
         }
         for (int i = 0; i < 18; i++)
         {
@@ -129,9 +142,32 @@ public class MainScreenNav : MenuScreen
         m_MapSpots[1].RegisterCallback<ClickEvent>(evt => OnMapSpot(1));
         m_MapSpots[2].RegisterCallback<ClickEvent>(evt => OnMapSpot(2));
 
-        m_MapSpots[0].schedule.Execute(ac=> loopTexture(spotSprites,m_MapSpots[0])).Every(30);
-        m_MapSpots[1].schedule.Execute(ac => loopTexture(spotSprites, m_MapSpots[1])).Every(30);
-        m_MapSpots[2].schedule.Execute(ac => loopTexture(spotSprites, m_MapSpots[2])).Every(30);
+        m_MapSpots[0].schedule.Execute(ac=> loopTexture(spotSprites,m_MapSpots[0],0)).Every(spotms);
+        m_MapSpots[1].schedule.Execute(ac => loopTexture(spotSprites, m_MapSpots[1],1)).Every(spotms);
+        m_MapSpots[2].schedule.Execute(ac => loopTexture(spotSprites, m_MapSpots[2],2)).Every(spotms);
+
+        initDotIndex();
+
+        m_MapDots[0].schedule.Execute(ac => loopTexture(DotSprites, m_MapDots[0], 0)).Every(dotms);
+        m_MapDots[1].schedule.Execute(ac => loopTexture(DotSprites, m_MapDots[1], 1)).Every(dotms);
+        m_MapDots[2].schedule.Execute(ac => loopTexture(DotSprites, m_MapDots[2], 2)).Every(dotms);
+        m_MapDots[3].schedule.Execute(ac => loopTexture(DotSprites, m_MapDots[3], 3)).Every(dotms);
+        m_MapDots[4].schedule.Execute(ac => loopTexture(DotSprites, m_MapDots[4], 4)).Every(dotms);
+        m_MapDots[5].schedule.Execute(ac => loopTexture(DotSprites, m_MapDots[5], 5)).Every(dotms);
+        m_MapDots[6].schedule.Execute(ac => loopTexture(DotSprites, m_MapDots[6], 6)).Every(dotms);
+        m_MapDots[7].schedule.Execute(ac => loopTexture(DotSprites, m_MapDots[7], 7)).Every(dotms);
+        m_MapDots[8].schedule.Execute(ac => loopTexture(DotSprites, m_MapDots[8], 8)).Every(dotms);
+        m_MapDots[9].schedule.Execute(ac => loopTexture(DotSprites, m_MapDots[9], 9)).Every(dotms);
+        m_MapDots[10].schedule.Execute(ac => loopTexture(DotSprites, m_MapDots[10], 10)).Every(dotms);
+        m_MapDots[11].schedule.Execute(ac => loopTexture(DotSprites, m_MapDots[11], 11)).Every(dotms);
+        m_MapDots[12].schedule.Execute(ac => loopTexture(DotSprites, m_MapDots[12], 12)).Every(dotms);
+        m_MapDots[13].schedule.Execute(ac => loopTexture(DotSprites, m_MapDots[13], 13)).Every(dotms);
+        m_MapDots[14].schedule.Execute(ac => loopTexture(DotSprites, m_MapDots[14], 14)).Every(dotms);
+        m_MapDots[15].schedule.Execute(ac => loopTexture(DotSprites, m_MapDots[15], 15)).Every(dotms);
+        m_MapDots[16].schedule.Execute(ac => loopTexture(DotSprites, m_MapDots[16], 16)).Every(dotms);
+        m_MapDots[17].schedule.Execute(ac => loopTexture(DotSprites, m_MapDots[17], 17)).Every(dotms);
+
+
 
         m_MapPickerBt[0].RegisterCallback<ClickEvent>(evt => onMapPickerBt(0));
         m_MapPickerBt[1].RegisterCallback<ClickEvent>(evt => onMapPickerBt(1));
@@ -172,7 +208,17 @@ public class MainScreenNav : MenuScreen
 
 
     }
-
+    void initDotIndex()
+    {
+        for (int i = 0; i < indexs.Length; i++)
+        {
+            indexs[i] = 0;
+        }
+        for (int i = 0; i < indexsss.Length; i++)
+        {
+            indexsss[i] = 0;
+        }
+    }
     private void onMapPickerBt(int v)
     {
         AudioManager.PlayDefaultButtonSound();
@@ -187,6 +233,11 @@ public class MainScreenNav : MenuScreen
     }
     private void OnMapBt(int v)
     {
+        MapBtHighlight(v);
+        if (!m_MapBts[v].ClassListContains("MapBt--focus"))
+        {
+            m_MapBts[v].AddToClassList("MapBt--focus");
+        }
         m_GPicker.style.display = DisplayStyle.None;
         m_infoG.style.display = DisplayStyle.None;
         m_MostionScreen.style.display = DisplayStyle.None;
@@ -207,6 +258,7 @@ public class MainScreenNav : MenuScreen
         }
         AudioManager.PlayDefaultButtonSound();
     }
+
 
     void checkID(int m,int p)//???? ????
     {
@@ -248,17 +300,17 @@ public class MainScreenNav : MenuScreen
         v.style.backgroundImage = sprites[r_index].texture;
         r_index++;
     }
-    void loopTexture( Sprite[] sprites,VisualElement v)
+    void loopTexture( Sprite[] sprites,VisualElement v,int i)
     {
-        if (index > sprites.Length-1)
+        if (indexs[i] > sprites.Length-1)
         {
-            index = 0;
+            indexs[i] = 0;
             return;
         }
-        v.style.backgroundImage = sprites[index].texture;
-        index++;
+        v.style.backgroundImage = sprites[indexs[i]].texture;
+        indexs[i]++;
     }
-    void loopTexture( Sprite[] sprites, Button v)
+    void loopTexture( Sprite[] sprites, Button v, int i)
     {
         if (index > sprites.Length - 1)
         {
@@ -266,6 +318,7 @@ public class MainScreenNav : MenuScreen
             return;
         }
         v.style.backgroundImage = sprites[index].texture;
+        Debug.Log($"{v.name}:{index}");
         index++;
     }
     private void OnBgBt(ClickEvent evt)
@@ -286,9 +339,34 @@ public class MainScreenNav : MenuScreen
     {
         AudioManager.PlayDefaultButtonSound();
         m_MainMenuUIManager.ShowHomeScreen();
-        m_GPicker.style.display = DisplayStyle.None;
-        m_infoG.style.display = DisplayStyle.None;
-        m_MostionScreen.style.display = DisplayStyle.None;
+        initNav();
+    }
+    void MapBtHighlight(int i)
+    {
+        Button vv = m_MapBts[i];
+        foreach (Button b in m_MapBts)
+        {
+            if (vv == b)
+            {
+                b.RemoveFromClassList("MapBt--un");
+                b.AddToClassList("MapBt--focus");
+
+            }
+            else
+            {
+                b.AddToClassList("MapBt--un");
+                b.RemoveFromClassList("MapBt--focus");
+
+            }
+        }
+    }
+    void initMapBt()
+    {
+        for (int i = 0; i < m_MapBts.Count; i++)
+        {
+            m_MapBts[i].RemoveFromClassList("MapBt--un");
+            m_MapBts[i].RemoveFromClassList("MapBt--focus");
+        }
     }
     void showBubble(int i)
     {
@@ -348,5 +426,6 @@ public class MainScreenNav : MenuScreen
         m_GPicker.style.display = DisplayStyle.None;
         m_infoG.style.display = DisplayStyle.None;
         m_MostionScreen.style.display = DisplayStyle.None;
+        initMapBt();
     }
 }

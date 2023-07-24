@@ -1,11 +1,12 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/Style.uss?fileID=7433441132597879392&amp;guid=6b31c8f1d61f19949a75a8f34ea11540&amp;type=3#Style" />
-    <ui:VisualElement name="bg_black" style="position: absolute; width: 100%; height: 100%; background-image: url(&apos;project://database/Assets/Resource/data/image/main/main_0.png?fileID=2800000&amp;guid=cd01f6e99b455eb46bf201063ec25501&amp;type=3#main_0&apos;);" />
+    <ui:VisualElement name="bg_black" style="position: absolute; width: 100%; height: 100%; background-image: url(&apos;project://database/Assets/Resource/data/image/main/main0.png?fileID=2800000&amp;guid=72f43971d4147544cb0e9a6df49e13c8&amp;type=3#main0&apos;);" />
     <ui:GroupBox name="G_Mainbt" style="position: absolute; width: 100%; height: 100%; display: none;">
         <ui:Button display-tooltip-when-elided="true" name="MainBt0" class="MainBt" style="height: 309px; width: 744px; position: absolute; top: 406px; left: 197px; background-image: url(&apos;project://database/Assets/Resource/data/image/main/main2bt1.png?fileID=2800000&amp;guid=50067a6601791c949a4ec391408ec7d7&amp;type=3#main2bt1&apos;); -unity-background-scale-mode: scale-to-fit; background-color: rgba(88, 88, 88, 0); border-left-color: rgba(255, 255, 255, 0); border-right-color: rgba(255, 255, 255, 0); border-top-color: rgba(255, 255, 255, 0); border-bottom-color: rgba(255, 255, 255, 0);" />
         <ui:Button display-tooltip-when-elided="true" name="MainBt1" class="MainBt" />
     </ui:GroupBox>
-    <ui:Button display-tooltip-when-elided="true" name="StartBt" class="StartBt">
+    <ui:Button display-tooltip-when-elided="true" name="StartBt" class="StartBt" style="display: flex;">
         <ui:VisualElement name="MainStart" style="position: absolute; height: 268px; width: 924px; top: 406px; left: 518px; background-image: url(&apos;project://database/Assets/Resource/data/image/main/main_1.png?fileID=2800000&amp;guid=fded02e375be8c5488fb5510b28c7c42&amp;type=3#main_1&apos;); -unity-background-scale-mode: scale-to-fit; display: flex;" />
+        <ui:VisualElement name="Touch" class="Touch" />
     </ui:Button>
 </ui:UXML>

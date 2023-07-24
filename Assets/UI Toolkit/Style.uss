@@ -94,6 +94,7 @@
     justify-content: flex-end;
     align-items: center;
     -unity-background-scale-mode: scale-to-fit;
+    transition-duration: 0.2s;
 }
 
 .MapSpot:focus {
@@ -119,4 +120,33 @@
     scale: 1 1;
     transform-origin: bottom;
     transition-duration: 0.3s;
+}
+
+.Dot {
+    position: relative;
+    height: 50px;
+    width: 50px;
+    -unity-background-scale-mode: scale-and-crop;
+    background-image: url('project://database/Assets/Resource/data/image/map/Station/%EC%8B%9C%ED%80%80%EC%8A%A4%2002_144.gif?fileID=2800000&guid=b7bbacf1f03ec6349949d0f36b397fff&type=3#시퀀스 02_144');
+}
+
+.MapBt--focus {
+    scale: 1.2 1.2;
+    transition-duration: 0.2s;
+}
+
+.Touch {
+    position: absolute;
+    height: 169px;
+    width: 190px;
+    background-image: url('project://database/Assets/Resource/data/image/click%203.png?fileID=2800000&guid=f0b8dd7234c4e2141b1f04db92d6095e&type=3#click 3');
+    -unity-background-scale-mode: scale-to-fit;
+    top: 568px;
+    left: 1236px;
+    transition-duration: 0.3s;
+}
+
+.Touch--out {
+    transition-duration: 0.3s;
+    translate: -33px -29px;
 }

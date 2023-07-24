@@ -5,7 +5,7 @@ using UnityEngine;
 public class InitTimer : MonoBehaviour
 {
     public float timer = 0;
-    float MaxTime = 5f;
+    float MaxTime = 100f;
 
     public bool isStart = false;
 

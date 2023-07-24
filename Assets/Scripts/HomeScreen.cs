@@ -12,21 +12,26 @@ public class HomeScreen : MenuScreen
     const string MAINBT1 = "MainBt1";
     const string GLOW = "Glow";
     const string GLOWT = "Glow0";
+    const string TOUCH = "Touch";
     [SerializeField]
     InitTimer timer;
     Button m_StartBt;
     Button m_MainBt0;
     Button m_MainBt1;
     VisualElement m_G_mainbt;
+    VisualElement m_touch;
 
     List<VisualElement> m_MapBtGlows = new List<VisualElement>();
     List<VisualElement> m_TrafficBtGlows = new List<VisualElement>();
+
+    int startcount;
     // Start is called before the first frame update
     protected override void SetVisualElements()
     {
         base.SetVisualElements();
         m_StartBt = m_Root.Q<Button>(STARTBT);
         m_G_mainbt = m_Root.Q<VisualElement>(GMAIN);
+        m_touch = m_Root.Q<VisualElement>(TOUCH);
         m_MainBt0 = m_Root.Q<Button>(MAINBT);
         m_MainBt1 = m_Root.Q<Button>(MAINBT1);
 
@@ -35,10 +40,6 @@ public class HomeScreen : MenuScreen
             m_TrafficBtGlows.Add(m_Root.Q<VisualElement>(GLOWT + $"{i}"));
             m_MapBtGlows.Add(m_Root.Q<VisualElement>(GLOW + $"{i}"));
         }
-
-    }
-    private void Start()
-    {
     }
     protected override void RegisterButtonCallbacks()
     {
@@ -47,14 +48,22 @@ public class HomeScreen : MenuScreen
 
         m_MainBt0.RegisterCallback<ClickEvent>(evt => OnMainBt(0));
         m_MainBt1.RegisterCallback<ClickEvent>(evt => OnMainBt(1));
+
+
+
     }
 
     private void OnStartBt(ClickEvent evt)
     {
         AudioManager.PlayDefaultButtonSound();
         ScreenStart();
-        LoopGlow();
+        if (startcount==0)
+        {
+            LoopGlow();
+            AnimTouch();
+        }
         timer.isStart = true;
+        startcount++;
     }
 
     void ScreenStart()
@@ -65,8 +74,11 @@ public class HomeScreen : MenuScreen
 
     private void OnStart(TransitionEndEvent evt)
     {
-        m_StartBt.style.display = DisplayStyle.None;
-        m_G_mainbt.style.display = DisplayStyle.Flex;
+        if (m_StartBt.ClassListContains("StartBt--pade"))
+        {
+            m_StartBt.style.display = DisplayStyle.None;
+            m_G_mainbt.style.display = DisplayStyle.Flex;
+        }
     }
 
     private void OnMainBt(int v)
@@ -108,6 +120,14 @@ public class HomeScreen : MenuScreen
         m_TrafficBtGlows[a].RegisterCallback<TransitionEndEvent>
             (
             evt => m_TrafficBtGlows[a].ToggleInClassList("GlowMap--un")
+            );
+    }
+    void AnimTouch()
+    {
+       m_touch.ToggleInClassList("Touch--out");
+       m_touch.RegisterCallback<TransitionEndEvent>
+            (
+            evt => m_touch.ToggleInClassList("Touch--out")
             );
     }
     public void initHome()
