@@ -17,6 +17,7 @@ public class MainScreenNav : MenuScreen
     const string INFOBACK = "infoBackBt";
     const string MAPPOP = "MapPopWindow";
     const string TOPINFO = "Topinfo";
+    const string TOPINFO2 = "Topinfo2";
     const string MOTIONS = "MotionScreen";
     const string INFOG = "infoG";
     const string RETURN = "returnBt";
@@ -56,6 +57,7 @@ public class MainScreenNav : MenuScreen
     VisualElement m_infoG; // info ????????
     VisualElement m_MapPopWindow;
     VisualElement m_Topinfo;
+    VisualElement m_Topinfo2;
 
     VisualElement m_GPicker;
 
@@ -95,6 +97,7 @@ public class MainScreenNav : MenuScreen
         m_infoG = m_Root.Q<VisualElement>(INFOG);
         m_MapPopWindow = m_Root.Q<VisualElement>(MAPPOP);
         m_Topinfo = m_Root.Q<VisualElement>(TOPINFO);
+        m_Topinfo2 = m_Root.Q<VisualElement>(TOPINFO2);
         m_GPicker = m_Root.Q<VisualElement>(GPICKER);
 
 
@@ -276,7 +279,18 @@ public class MainScreenNav : MenuScreen
     }
     void setinfo(int i)
     {
-        m_Topinfo.style.backgroundImage = Topinfos[i].texture;
+        if( i == 9 || i== 10 || i ==11 )
+        {
+            m_Topinfo2.style.display = DisplayStyle.Flex;
+            m_Topinfo.style.display = DisplayStyle.None;
+            m_Topinfo2.style.backgroundImage = Topinfos[i].texture; 
+        }
+        else
+        {
+            m_Topinfo.style.display = DisplayStyle.Flex;
+            m_Topinfo2.style.display = DisplayStyle.None;
+            m_Topinfo.style.backgroundImage = Topinfos[i].texture;
+        }
     }
     private IEnumerator PlayTextureRoutine()
     {
@@ -285,7 +299,7 @@ public class MainScreenNav : MenuScreen
         {
             // ?????? ???? ????
             PlayTextureOnce(allRoutes[m_IDID], m_MostionScreen);
-            yield return new WaitForSeconds(0.05f); // 0.1?????? ????
+            yield return new WaitForSeconds(0.03f); // 0.1?????? ????
         }
 
     }
