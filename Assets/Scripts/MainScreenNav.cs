@@ -441,5 +441,6 @@ public class MainScreenNav : MenuScreen
         m_infoG.style.display = DisplayStyle.None;
         m_MostionScreen.style.display = DisplayStyle.None;
         initMapBt();
+        initMap();
     }
 }

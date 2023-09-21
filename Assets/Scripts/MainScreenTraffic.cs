@@ -60,5 +60,11 @@ public class MainScreenTraffic : MenuScreen
     {
         AudioManager.PlayDefaultButtonSound();
         m_MainMenuUIManager.ShowHomeScreen();
+        m_TrafficPopWindow.style.display = DisplayStyle.None;
+    }
+
+    public void InitScreen()
+    {
+        m_TrafficPopWindow.style.display = DisplayStyle.None;
     }
 }

@@ -16,6 +16,9 @@ public class InitTimer : MonoBehaviour
     MainScreenNav nav;
 
     [SerializeField]
+    MainScreenTraffic traffic;
+
+    [SerializeField]
     HomeScreen home;
     void Start()
     {
@@ -34,6 +37,7 @@ public class InitTimer : MonoBehaviour
         {
             uImanager.ShowHomeScreen();
             nav.initNav();
+            traffic.InitScreen();
             home.initHome();
             AudioManager.StopSound();
             isStart = false;
